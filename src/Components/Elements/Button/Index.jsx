@@ -1,7 +1,7 @@
 const Button = (props) => {
-  const {children, variant='bg-slate-500'} = props;
+  const {children, variant='bg-red-500'} = props;
   return (
-    <button className={`${variant} text-xl text-white text-bold rounded-xl px-5 py-2`}>
+    <button className={`${variant} w-full flex items-center justify-center text-lg text-white text-bold rounded-xl px-3 py-2`}>
       {children}
     </button>
   )
