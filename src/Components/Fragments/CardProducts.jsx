@@ -3,10 +3,9 @@ import Button from '../Elements/Button/Index';
 const CardProducts = (props) => {
     const {children} = props;
     return(
-    <div className="flex justify-center">
-      <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
+
+    <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow">
         {children}
-      </div>
     </div>
     )
 }
@@ -17,21 +16,23 @@ const Header = (props) => {
     )
 }
 
-const Body = () => {
+const Body = (props) => {
+    const {title, description} = props;
     return(
         <div className='px-5 pb-5'>
-            <a href='#'><h5 className="text-xl font-semibold tracking-tight text-white">Sepatu Baru</h5></a>
+            <a href='#'><h5 className="text-xl font-semibold tracking-tight text-white">{title}</h5></a>
             <p className='text-m text-white text-justify'>
-                lorem ipsum dolor sit amet, consectetur adipiscing elit.lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {description}
             </p>
         </div>
     )
 }
 
-const Footer = () => {
+const Footer = (props) => {
+    const {price}   = props;    
     return(
         <div className='flex items-center justify-between px-5 pb-5'>
-            <span className="text-xl font-bold text-white">Rp 10.000.000</span>
+            <span className="text-xl font-bold text-white">{price}</span>
             <Button>Add to Chart</Button>
         </div>
     )
