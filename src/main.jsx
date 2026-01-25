@@ -5,12 +5,14 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import LoginPage from './pages/Login.jsx'
 import RegisterPage from './pages/Register.jsx'
-
+import ProductsPage from './pages/Products.jsx'
 
 const router = createBrowserRouter([
   {path:'/',element:<div>lala</div>},
+  {path:'*',element:<div>Not Found Bro!</div>},
   {path:'/login',element:<LoginPage/>},
-  {path:'/register',element:<RegisterPage/>}
+  {path:'/register',element:<RegisterPage/>},
+  {path:'/products',element:<ProductsPage/>},
 ])
 
 createRoot(document.getElementById('root')).render(
