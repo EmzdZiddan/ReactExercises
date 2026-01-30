@@ -9,7 +9,7 @@ import ProductsPage from './pages/Products.jsx'
 import Test from './pages/Test.jsx'
 
 const router = createBrowserRouter([
-  {path:'/',element:<div>lala</div>},
+  {path:'/',element:<LoginPage/>},
   {path:'*',element:<div>Not Found Bro!</div>},
   {path:'/login',element:<LoginPage/>},
   {path:'/register',element:<RegisterPage/>},
