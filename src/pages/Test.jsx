@@ -1,20 +1,20 @@
-import {useState} from 'react';
-import Button from '../Components/Elements/Button/Index.jsx';
+import { useState } from 'react'
 
 const Test = () => {
+    const [value, setValue] = useState([])
 
-    const [count, setCount] = useState([]);
-    const hitung = () => {
-        setCount([...count, 1]);
+    const handle = (id) => {
+        if(id === value.id){
+            setValue(value + 0)
+        }else{
+            setValue(console.log([...value, {nomor:1}]))
+        }
     }
-
-
 
     return (
         <div>
-            <h1></h1>
-            <h1>Count: {count}</h1>
-            <Button onClick={() => hitung()}>Increment</Button>
+            <h1>NILAI {value}</h1>
+            <button onClick={handle}>KLIK SAYA</button>
         </div>
     )
 }
