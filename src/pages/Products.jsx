@@ -38,16 +38,21 @@ const ProductsPage = () => {
     const [cart, setCart] = useState([]);
     const[totalPrice, setTotalPrice] = useState(0)
 
+   
+    useEffect( () => {
+        setCart(JSON.parse(localStorage.getItem("cart")) || []);
+    }, []);
+
     useEffect(() => {
-        const sum = cart.reduce((acc,item) => {
-            const product = productsData.find((p) => p.id === item.id);
-            return acc + product.price*item.quantity;
-            
-        },0)
-        setTotalPrice(sum)
-    },[cart])
-
-
+        if (cart.length > 0) {
+            const sum = cart.reduce((acc, item) => {
+                const product = productsData.find((p) => p.id === item.id);
+                return acc + product.price * item.quantity; // ✅ Ganti qty jadi quantity
+            }, 0);
+            setTotalPrice(sum);
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+    }, [cart]);
 
 
     const handleAddToCart = (id) =>  {
