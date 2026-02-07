@@ -1,6 +1,6 @@
 import CardProducts from '../Components/Fragments/CardProducts.jsx';
 import Button from '../Components/Elements/Button/Index.jsx';
-import { useState,useEffect} from 'react';
+import { useState,useEffect, useRef} from 'react';
 
 const productsData = [
     {
@@ -47,7 +47,7 @@ const ProductsPage = () => {
         if (cart.length > 0) {
             const sum = cart.reduce((acc, item) => {
                 const product = productsData.find((p) => p.id === item.id);
-                return acc + product.price * item.quantity; // ✅ Ganti qty jadi quantity
+                return acc + product.price * item.quantity;
             }, 0);
             setTotalPrice(sum);
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -62,18 +62,24 @@ const ProductsPage = () => {
                     item.id === id ? {...item, quantity: item.quantity + 1} : item
                 )
             ) 
-
         } else {
             setCart([...cart, {id: id, quantity: 1}]);
         }
-       
     }
 
+    const totalPriceRef = useRef(null);
 
+    useEffect(() => {
+        if(cart.length > 0){
+            totalPriceRef.current.style.display = 'table-row';
+        }else {
+            totalPriceRef.current.style.display = 'none';
+        }
+    },[cart]);
 
   return (
     <>
-  
+    {console.log(cart)}
     <div className='flex flex-row p-4 gap-10 items-center justify-end  bg-blue-900'>
         <div className="text-white text-bold">{email}</div>
         <Button type="button" width='w-fit' col='black' onClick={handleLogout}>Logout</Button>
@@ -119,7 +125,7 @@ const ProductsPage = () => {
                         );
                     } )}
 
-                    <tr >
+                    <tr ref={totalPriceRef}>
                         <td colSpan={3}><b>Total Price</b></td>
                         {totalPrice.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}
                         
