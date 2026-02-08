@@ -12,7 +12,7 @@ const CardProducts = (props) => {
 const Header = (props) => {
     const {img} = props;
     return( 
-        <a><img src={img} alt='Product Image' className='p-8 rounded-t-lg'></img></a>  
+        <a><img src={img} alt='Product Image' className='p-8 rounded-t-lg h-48 w-full object-contain'></img></a>  
     )
 }
 
@@ -20,9 +20,9 @@ const Body = (props) => {
     const {title, description} = props;
     return(
         <div className='px-5 pb-5'>
-            <a href='#'><h5 className="text-xl font-semibold tracking-tight text-white">{title}</h5></a>
+            <a href='#'><h5 className="text-xl font-semibold tracking-tight text-white">{title.substring(0,30)}...</h5></a>
             <p className='text-m text-white text-justify'>
-                {description}
+            {description.substring(0, 80)}...
             </p>
         </div>
     )   
@@ -32,7 +32,7 @@ const Footer = (props) => {
     const {price, onClick}   = props;    
     return(
         <div className='flex items-center justify-between px-5 pb-5'>
-            <span className="text-xl font-bold text-white">{price.toLocaleString('id-ID', {style: 'currency', currency: 'IDR'})}</span>
+            <span className="text-xl font-bold text-white">{price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</span>
             <Button width='fit' onClick={onClick}>Add to Chart</Button>
         </div>
     )
