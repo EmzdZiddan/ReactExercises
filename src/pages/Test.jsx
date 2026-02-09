@@ -1,11 +1,9 @@
-import getProducts from '../services/product.services'
-import {useEffect} from 'react'
+import axios from 'axios'
+
 
 const Test = () => {
 
-useEffect( () => {
-  getProducts()
-})
+
 
   return (
     <div className="p-8">

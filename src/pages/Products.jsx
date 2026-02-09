@@ -1,19 +1,31 @@
 import CardProducts from '../Components/Fragments/CardProducts.jsx';
 import Button from '../Components/Elements/Button/Index.jsx';
 import { useState,useEffect, useRef} from 'react';
-import getProducts from '../services/product.services'
+import getProducts from '../services/product.service'
+import {getUsername} from '../services/auth.service.js'
 
 
 
 const ProductsPage = () => {
 
-    const email = localStorage.getItem('email');
+    //login & logout
+    const [username, setUsername] = useState('')
+
+    useEffect( () => {
+        const token = localStorage.getItem('token');
+        if(token){
+            setUsername(getUsername(token))
+        }else{
+            window.location.href = '/login';
+        }
+    },[])
+
     const handleLogout = () => {
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
+        localStorage.removeItem('token');
         window.location.href = '/login';
     }
 
+    //add To Cart
     const [cart, setCart] = useState([]);
     const[totalPrice, setTotalPrice] = useState(0)
     const [productsData,setProductsData] = useState([])
@@ -23,8 +35,6 @@ const ProductsPage = () => {
             setProductsData(data)
         })
     })
-
-
    
     useEffect( () => {
         setCart(JSON.parse(localStorage.getItem("cart")) || []);
@@ -67,7 +77,7 @@ const ProductsPage = () => {
   return (
     <>
     <div className='flex flex-row p-4 gap-10 items-center justify-end  bg-blue-900'>
-        <div className="text-white text-bold">{email}</div>
+        <div className="text-white text-bold">{username}</div>
         <Button type="button" width='w-fit' col='black' onClick={handleLogout}>Logout</Button>
     </div>
 
