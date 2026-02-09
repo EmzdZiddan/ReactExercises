@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router/dom";
 import LoginPage from './pages/Login.jsx'
 import RegisterPage from './pages/Register.jsx'
 import ProductsPage from './pages/Products.jsx'
+import ProfilePage from './pages/Profile.jsx'
 import Test from './pages/Test.jsx'
 
 const router = createBrowserRouter([
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
   {path:'/login',element:<LoginPage/>},
   {path:'/register',element:<RegisterPage/>},
   {path:'/products',element:<ProductsPage/>},
-  {path:'/test',element:<Test/>},
+  {path:'/profile',element:<ProfilePage/>},
+  {path:'/test',element:<Test/>}
 ])
 
 createRoot(document.getElementById('root')).render(
