@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { jwtDecode } from 'jwt-decode'  // ← Ubah ini
+import { jwtDecode } from 'jwt-decode' 
 
 const Login = (data, callback) => {
     axios.post('https://fakestoreapi.com/auth/login', data)

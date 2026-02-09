@@ -2,23 +2,14 @@ import CardProducts from '../Components/Fragments/CardProducts.jsx';
 import Button from '../Components/Elements/Button/Index.jsx';
 import { useState,useEffect, useRef} from 'react';
 import getProducts from '../services/product.service'
-import {getUsername} from '../services/auth.service.js'
+import useLogin from '../hooks/useLogin.jsx'
 
 
 
 const ProductsPage = () => {
 
-    //login & logout
-    const [username, setUsername] = useState('')
+    const username = useLogin()
 
-    useEffect( () => {
-        const token = localStorage.getItem('token');
-        if(token){
-            setUsername(getUsername(token))
-        }else{
-            window.location.href = '/login';
-        }
-    },[])
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -83,7 +74,7 @@ const ProductsPage = () => {
 
     <div className="flex flex-row p-4">
         
-        <div className="w-2/3 flex flex-wrap gap-4 justify-items-center">
+        <div className="w-2/3 flex flex-wrap gap-4 items-end">
             {productsData.length > 0 && 
             productsData.map((product) =>(
             <CardProducts key={product.id}>
