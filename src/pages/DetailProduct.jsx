@@ -2,20 +2,17 @@ import {useParams} from 'react-router-dom';
 import {useState,useEffect} from 'react'
 import {getDetailProduct} from '../services/product.service'
 
+
 const DetailProductPage = () => {
 
     const {id} = useParams();
     const [product, setProduct] = useState ({})
 
-
-
     useEffect(() => {
         getDetailProduct(id, (data) => {
             setProduct(data)
         });
-    },[id]);
-
-    console.log(product)
+    },[id])
 
 
     return (
