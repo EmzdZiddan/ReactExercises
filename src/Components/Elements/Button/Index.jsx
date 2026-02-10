@@ -5,10 +5,10 @@ const Button = (props) => {
     const {type,children,onClick, col='blue',width='full', rightIcons='arrowRight'} = props;
 
     const btnCol = {
-        red : 'bg-red-700',
-        green : 'bg-green-700',
-        blue : 'bg-blue-700',
-        black : 'bg-black'
+        red : 'bg-red-700 hover:bg-red-800',
+        green : 'bg-green-700 hover:bg-green-800',
+        blue : 'bg-blue-700 hover:bg-blue-800',
+        black : 'bg-black hover:bg-red-700'
     };
 
     const icons = {

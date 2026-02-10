@@ -15,15 +15,16 @@ const FormLogin = () => {
         username : e.target.username.value,
         password : e.target.password.value};
 
+        
         Login(data,(status, res) => {
     
             if(status){
                 localStorage.setItem('token',res)
-                window.location.href = '/products';
+                window.location.href = '/product';
             }else{
-               console.warn('[FormLogin] login failed:', res)
                setLoginFailed(res)
             }
+
         } )
     }
 

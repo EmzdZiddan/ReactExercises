@@ -1,7 +1,7 @@
 import CardProducts from '../Components/Fragments/CardProducts.jsx';
 import Button from '../Components/Elements/Button/Index.jsx';
 import { useState,useEffect, useRef} from 'react';
-import getProducts from '../services/product.service'
+import {getProducts} from '../services/product.service'
 import useLogin from '../hooks/useLogin.jsx'
 
 
@@ -10,14 +10,15 @@ const ProductsPage = () => {
 
     const username = useLogin()
 
-
     const handleLogout = () => {
         localStorage.removeItem('token');
         window.location.href = '/login';
     }
 
     //add To Cart
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(() => 
+        JSON.parse(localStorage.getItem("cart")) || []
+    );
     const[totalPrice, setTotalPrice] = useState(0)
     const [productsData,setProductsData] = useState([])
 
@@ -26,10 +27,6 @@ const ProductsPage = () => {
             setProductsData(data)
         })
     })
-   
-    useEffect( () => {
-        setCart(JSON.parse(localStorage.getItem("cart")) || []);
-    }, []);
 
     useEffect(() => {
         if (productsData.length > 0 && cart.length > 0) {
@@ -78,7 +75,7 @@ const ProductsPage = () => {
             {productsData.length > 0 && 
             productsData.map((product) =>(
             <CardProducts key={product.id}>
-                <CardProducts.Header img={product.image}/>
+                <CardProducts.Header img={product.image} id={product.id}/>
                 <CardProducts.Body title={product.title} description={product.description}></CardProducts.Body>
                 <CardProducts.Footer 
                 price={product.price} 
@@ -89,11 +86,11 @@ const ProductsPage = () => {
             ))}
         </div>
 
-        <div className="w-1/3">
-            <h1 className="text-3xl font-bold">Cart</h1>
-            <table className="w-full text-sm ">
+        <div className="w-1/3 h-fit p-4 rounded-2xl bg-blue-900 text-white">
+            <h1 className="text-3xl font-bold ">Cart</h1>
+            <table className="w-full text-md  ">
                 <thead>
-                    <tr>
+                    <tr className='text-amber-300 font-bold text-md'>
                         <th>Product</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -114,7 +111,7 @@ const ProductsPage = () => {
                         );
                     } )}
 
-                    <tr ref={totalPriceRef}>
+                    <tr ref={totalPriceRef} className='bg-yellow-600'>
                         
                         <td colSpan={3}><b>Total Price</b></td>
                         <b>{totalPrice.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</b>
@@ -132,3 +129,4 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+
