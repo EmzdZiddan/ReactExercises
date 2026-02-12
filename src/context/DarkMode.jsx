@@ -1,19 +1,18 @@
 import {createContext, useState} from 'react'
-
-
 const DarkModeContext = createContext();
 
-const DarkModeContextProvider = (children) => {
 
-    const [isDarkMode, setIsDarkMode] = useState(false)
+const DarkModeContextProvider = ({children}) => {
+
+    const [isDarkMode, setIsDarkMode] = useState(true)
 
     return ( 
-        <DarkModeContext.Provider value={isDarkMode, setIsDarkMode}>
+        <DarkModeContext.Provider value={{isDarkMode, setIsDarkMode}}>
             {children}
         </DarkModeContext.Provider>
     )
   
 }
-
 export const DarkMode = DarkModeContext;
+
 export default DarkModeContextProvider;

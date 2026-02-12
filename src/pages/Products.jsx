@@ -1,13 +1,14 @@
 import CardProducts from '../Components/Fragments/CardProducts.jsx';
-import Button from '../Components/Elements/Button/Index.jsx';
 import { useState,useEffect, useRef} from 'react';
 import {getProducts} from '../services/product.service'
 import useLogin from '../hooks/useLogin.jsx'
-
+import Navbar from '../Components/Layout/Navbar.jsx'
+import {useContext} from 'react';
+import {DarkMode} from '../context/DarkMode.jsx'
 
 
 const ProductsPage = () => {
-
+    const {isDarkMode}= useContext(DarkMode) 
     const username = useLogin()
 
     const handleLogout = () => {
@@ -64,12 +65,12 @@ const ProductsPage = () => {
 
   return (
     <>
-    <div className='flex flex-row p-4 gap-10 items-center justify-end  bg-blue-900'>
-        <div className="text-white text-bold">{username}</div>
-        <Button type="button" width='w-fit' col='black' onClick={handleLogout}>Logout</Button>
-    </div>
 
-    <div className="flex flex-row p-4">
+
+    <Navbar username={username} onLogout={handleLogout}>
+    </Navbar>
+
+    <div className={`flex flex-row p-4 ${isDarkMode && 'bg-slate-700'}`}>
         
         <div className="w-2/3 flex flex-wrap gap-4 items-end">
             {productsData.length > 0 && 
